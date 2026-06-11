@@ -9,20 +9,38 @@ writes from a terminal or automation workflow.
 
 ## Install
 
-### Shell Script
+### Recommended: release installer
 
 ```bash
 curl -fsSL https://account.megaeth.com/install | sh
 ```
 
-The installer downloads the latest release, verifies its checksum, installs the
-`mega` command, and installs the bundled agent skill. Add the printed install
-directory to `PATH` if needed.
+The installer downloads a GitHub Release asset, verifies its `.sha256`
+checksum, installs the `mega` command, and installs the bundled agent skill.
+This keeps the convenience path tied to the same versioned release artifacts
+available for manual inspection. Add the printed install directory to `PATH` if
+needed.
 
 Install a specific release:
 
 ```bash
 curl -fsSL https://account.megaeth.com/install | sh -- --version v0.1.0
+```
+
+### Verifiable manual install
+
+If you prefer to inspect the release artifact yourself before installing,
+download the archive and checksum from the
+[GitHub Releases page](https://github.com/megaeth-labs/wallet-cli/releases),
+verify the checksum locally, then extract and install.
+
+Example:
+
+```bash
+VERSION=v0.1.0
+curl -L -O https://github.com/megaeth-labs/wallet-cli/releases/download/$VERSION/mega-wallet-cli-$VERSION.tar.gz
+curl -L -O https://github.com/megaeth-labs/wallet-cli/releases/download/$VERSION/mega-wallet-cli-$VERSION.tar.gz.sha256
+shasum -a 256 -c mega-wallet-cli-$VERSION.tar.gz.sha256
 ```
 
 ### Build From Source
